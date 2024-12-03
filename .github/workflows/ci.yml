@@ -49,7 +49,7 @@ jobs:
               run: npm run initbdd
             - name: Add Admin Test User
               run: |
-                mysql -u root -ptoor --host 127.0.0.1 --port 3306 --database test < ./test/insert_bdd_user.sql
+                mysql -u root -ptoor --host 127.0.0.1 --port 3306 --database test < ./test/insert_test_user.sql
 
             - name: Run Main Router Test
               run: npm run test:file main_route
