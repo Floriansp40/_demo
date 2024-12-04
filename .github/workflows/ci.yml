@@ -57,6 +57,9 @@ jobs:
 
             - name: Run all test and coverage
               run: npm run test:cov
+
+            - name: Check fil and folder
+              run: ls -al
               
             - name: Upload Coverage Artifacts
               uses: actions/upload-artifact@v4
