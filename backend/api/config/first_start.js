@@ -12,7 +12,7 @@ exports.initFirstUser = async () => {
             await DB.User.create({
                 pseudo: 'admin',
                 email: 'admin@admin.admin',
-                password: 'nimda'
+                password: process.env.FIRST_ADMIN_PASSWORD
             })
         }        
     }catch(err){
