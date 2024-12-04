@@ -65,3 +65,8 @@ jobs:
                 retention-days: 3
             - name: JUST TO SEE
               run: pwd
+
+            - name: SonarQube Quality
+              uses: SonarSource/sonarcloud-github-action@v3.1.0
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
