@@ -8,7 +8,7 @@ const app = express()
 app.disable("x-powered-by")
 
 app.use(cors({
-    origin: "*",
+    origin: process.env.ALLOW_ORIGIN,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: "Origin, X-Requested-With, x-access-token, role, Content, Accept, Content-Type, Authorization"
  }))
