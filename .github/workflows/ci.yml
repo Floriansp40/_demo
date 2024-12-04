@@ -56,10 +56,12 @@ jobs:
 
             - name: Run all test and coverage
               run: npm run test:cov
+              
             - name: Upload Coverage Artifacts
               uses: actions/upload-artifact@v4
               with:
                 name: coverage-repport
                 path: ./coverage
                 retention-days: 3
-              
+            - name: JUST TO SEE
+              run: pwd
