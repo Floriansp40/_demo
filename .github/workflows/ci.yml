@@ -133,6 +133,7 @@ jobs:
           run: |
             ls -al
             ls -al cypress
+            ls -al cypress/screenshots
           
 
         - uses: actions/upload-artifact@v4
