@@ -7,6 +7,7 @@ on:
 
 jobs:
     backend:
+        if: ${{ contains(github.event.head_commit.message, '#all') }}
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -78,3 +79,21 @@ jobs:
                 projectBaseDir: ./backend
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    Integration:
+      runs-on: ubuntu-latest
+      
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Start Builded Backend Docker
+          working-directory: backend
+          run: |
+            docker compose -f docker-compose-build.yml up -d
+            docker ps -a
+
+        - name: Clean Builded Backend Docker
+          run: docker compose - docker-compose-build.yml down
+

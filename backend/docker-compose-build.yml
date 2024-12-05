@@ -1,0 +1,18 @@
+services:
+  
+  bdd-build:
+    container_name: bdd_build
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: leplanterdebaton
+      MYSQL_USER: cesi
+      MYSQL_PASSWORD: isec
+  
+  backend-build:
+    container_name: backend_build
+    build: .
+    environment:
+      BDD_HOST: bdd-build
+    ports:
+      - 23000:23000
