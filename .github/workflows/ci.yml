@@ -117,6 +117,7 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             runTests: false
+            working-directory: frontend
 
         - run: npm i
         
