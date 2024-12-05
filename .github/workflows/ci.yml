@@ -96,6 +96,12 @@ jobs:
             docker compose -f docker-compose-build.yml up -d
             docker ps -a
 
+        - name: Test container
+          run: curl http://127.0.0.1:23000
+
+        - name: Autre test
+          run: curl http://localhost:23000
+
         - name: Setup node
           uses: actions/setup-node@v3
           with:
@@ -123,12 +129,14 @@ jobs:
           with:
             name: cypress-screenshots
             path: frontend/cypress/screenshots
+            retention-days: 1
 
         - uses: actions/upload-artifact@v4
           if: always()
           with:
             name: cypress-videos
             path: frontend/cypress/videos
+            retention-days: 1
 
         - name: Clean Builded Backend Docker
           run: docker compose -f docker-compose-build.yml down
