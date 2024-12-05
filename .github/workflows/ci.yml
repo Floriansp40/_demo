@@ -82,11 +82,19 @@ jobs:
 
     Integration:
       runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: frontend
+
       
 
       steps:
         - name: Checkout
           uses: actions/checkout@v3
+
+        - name: Check fil and folder
+          run: |
+            ls -al
 
         - name: Start Builded Backend Docker
           working-directory: backend
@@ -96,6 +104,7 @@ jobs:
 
         - name: Cypress E2E Run
           uses: cypress-io/github-action@v5
+          
 
         - uses: actions/upload-artifact@v4
           with:
