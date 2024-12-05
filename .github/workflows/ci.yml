@@ -129,8 +129,10 @@ jobs:
 
 
         - name: Check fil and folder
+          if: always()
           run: |
             ls -al
+            ls -al cypress
           
 
         - uses: actions/upload-artifact@v4
