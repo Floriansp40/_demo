@@ -86,32 +86,20 @@ jobs:
         run:
           working-directory: frontend
 
-      
-
       steps:
         - name: Checkout
           uses: actions/checkout@v3
 
-        - name: Check fil and folder
+        - name: Start Builded Backend Docker
+          working-directory: backend
           run: |
-            ls -al
+            docker compose -f docker-compose-build.yml up -d
+            docker ps -a
 
-        # - name: Start Builded Backend Docker
-        #   working-directory: backend
-        #   run: |
-        #     docker compose -f docker-compose-build.yml up -d
-        #     docker ps -a
-
-        # - name: Setup node
-        #   uses: actions/setup-node@v3
-        #   with:
-        #     node-version: 20.x
-
-        # Ecriture classique
-        # - name: Cypress E2E Run
-        #   uses: cypress-io/github-action@v5
-        #   with:
-        #     project: ./frontend
+        - name: Setup node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 20.x
 
         - name: Cypress E2E Install
           uses: cypress-io/github-action@v6
@@ -119,7 +107,8 @@ jobs:
             runTests: false
             working-directory: frontend
 
-        - run: npm i
+        - name: Intall Frontend Packages
+          run: npm i
         
         - name: Start E2E Test
           uses: cypress-io/github-action@v6
@@ -127,14 +116,6 @@ jobs:
             install: false
             working-directory: frontend
             start: npm run dev
-
-
-        - name: Check fil and folder
-          if: always()
-          run: |
-            ls -al
-            ls -al cypress
-            ls -al cypress/screenshots
           
 
         - uses: actions/upload-artifact@v4
@@ -149,6 +130,6 @@ jobs:
             name: cypress-videos
             path: frontend/cypress/videos
 
-        # - name: Clean Builded Backend Docker
-        #   run: docker compose -f docker-compose-build.yml down
+        - name: Clean Builded Backend Docker
+          run: docker compose -f docker-compose-build.yml down
 
