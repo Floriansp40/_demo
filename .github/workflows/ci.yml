@@ -97,6 +97,7 @@ jobs:
             docker ps -a
 
         - name: Test container
+          if: success()
           run: curl http://127.0.0.1:23000
 
         - name: Autre test
