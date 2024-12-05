@@ -117,7 +117,7 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             runTests: false
-            working-directory: frontend
+            # working-directory: frontend
 
         - run: npm i
         
@@ -125,7 +125,7 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             install: false
-            working-directory: frontend
+            # working-directory: frontend
 
 
         - name: Check fil and folder
