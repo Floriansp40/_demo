@@ -120,6 +120,7 @@ jobs:
             working-directory: frontend
 
         - run: npm i
+        - run: npm run dev
         
         - name: Start E2E Test
           uses: cypress-io/github-action@v6
