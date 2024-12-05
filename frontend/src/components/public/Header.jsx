@@ -9,7 +9,7 @@ const Header = () => {
             <nav>
                 <ul>
                     <li><Link to="/home">Accueil</Link></li>|
-                    <li><Link to="/admin">&nbsp;Admin</Link></li>
+                    <li><Link to="/admin" data-cy="admin-link">&nbsp;Admin</Link></li>
                 </ul>
             </nav>
         </header>

@@ -13,7 +13,7 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='home'>
+        <div className='home' data-cy="home-page">
             {
                 cocktails.map((ckt, id) => (
                     <Card key={id} marcel={ckt} image='https://picsum.photos/1200/800?random=' />

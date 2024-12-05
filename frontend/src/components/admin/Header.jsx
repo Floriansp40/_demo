@@ -12,9 +12,9 @@ const Header = () => {
     }
 
     return (
-        <div className="AHeader">
+        <div className="AHeader" data-cy="admin-header">
             Header Admin
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout} data-cy="admin-logout">Logout</button>
         </div>
     );
 };
