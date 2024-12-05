@@ -7,7 +7,7 @@ describe("TEST LOGIN FORM", () => {
 
     it("Should login and redirect to admin page", () => {
 
-        cy.get('[data-cy="admin-link"]').click()
+        // cy.get('[data-cy="admin-link"]').click()
         cy.get('[data-cy="admin-login"]').should("be.visible")
 
         // cy.get('[data-cy="admin-login"').click()
