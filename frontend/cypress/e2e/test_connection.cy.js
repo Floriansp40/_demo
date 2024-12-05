@@ -2,7 +2,7 @@
 
 describe("TEST LOGIN FORM", () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173')
+        cy.visit('http://localhost:5173/auth/login')
     })
 
     it("Should login and redirect to admin page", () => {
