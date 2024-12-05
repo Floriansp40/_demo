@@ -117,7 +117,7 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             runTests: false
-            # working-directory: frontend
+            working-directory: frontend
 
         - run: npm i
         
@@ -125,7 +125,7 @@ jobs:
           uses: cypress-io/github-action@v6
           with:
             install: false
-            # working-directory: frontend
+            working-directory: frontend
 
 
         - name: Check fil and folder
@@ -133,15 +133,15 @@ jobs:
             ls -al
           
 
-        # - uses: actions/upload-artifact@v4
-        #   with:
-        #     name: cypress-screenshots
-        #     path: cypress/screenshots
+        - uses: actions/upload-artifact@v4
+          with:
+            name: cypress-screenshots
+            path: cypress/screenshots
 
-        # - uses: actions/upload-artifact@v4
-        #   with:
-        #     name: cypress-videos
-        #     path: cypress/videos
+        - uses: actions/upload-artifact@v4
+          with:
+            name: cypress-videos
+            path: cypress/videos
 
         # - name: Clean Builded Backend Docker
         #   run: docker compose -f docker-compose-build.yml down
