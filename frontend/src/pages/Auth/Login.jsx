@@ -46,7 +46,7 @@ const Login = () => {
                 <input type="text" name="password" value={credentials.password} onChange={onChange}/>
             </div>
             <div className="group">
-                <button>Connexion</button>
+                <button data-cy="admin-login">Connexion</button>
             </div>
         </form>
     );
