@@ -8,4 +8,4 @@ RUN npm i --omit=dev
 EXPOSE 23000
 
 USER node
-CMD npm run start
+CMD npm run initbdd; npm run start
