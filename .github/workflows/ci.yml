@@ -98,7 +98,7 @@ jobs:
 
         - name: Test Docker log
           run: |
-            docekr logs -f --until=10s backend_build
+            docker logs -f --until=10s backend_build
 
         - name: Test container
           if: success()
