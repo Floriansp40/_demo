@@ -96,6 +96,10 @@ jobs:
             docker compose -f docker-compose-build.yml up -d
             docker ps -a
 
+        - name: Test Docker log
+          run: |
+            docekr logs -f --until=10s backend_build
+
         - name: Test container
           if: success()
           run: curl http://127.0.0.1:23000
