@@ -146,3 +146,10 @@ jobs:
           working-directory: backend
           run: docker compose -f docker-compose-build.yml down
 
+        - name: SonarQube Quality
+          uses: SonarSource/sonarcloud-github-action@v3.1.0
+          with:
+            projectBaseDir: ./frontend
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
