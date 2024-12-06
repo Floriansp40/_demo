@@ -5,9 +5,9 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: leplanterdebaton
-      MYSQL_USER: cesi
-      MYSQL_PASSWORD: isec
+      MYSQL_DATABASE: bddname
+      MYSQL_USER: roger
+      MYSQL_PASSWORD: regor
   
   backend-build:
     container_name: backend_build
