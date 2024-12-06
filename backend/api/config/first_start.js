@@ -7,7 +7,7 @@ exports.initFirstUser = async () => {
         const test = await DB.User.findAll()
         if(test.length == 0){
             console.log('First user admin created')
-            console.log('email : admin@admin.admin\npassword: nimda')
+            console.log('email : admin@admin.admin\npassword: '+process.env.FIRST_ADMIN_PASSWORD)
             console.log('### PLEASE CHANGE PASSWORD')
             await DB.User.create({
                 pseudo: 'admin',

@@ -17,3 +17,9 @@ services:
       BDD_HOST: bdd-build
     ports:
       - 23000:23000
+
+  adminer-local:
+    container_name: adminer_build_local
+    image: adminer
+    ports:
+      - 8080:8080
