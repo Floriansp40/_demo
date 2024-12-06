@@ -149,5 +149,6 @@ jobs:
             retention-days: 1
 
         - name: Clean Builded Backend Docker
+          working-directory: backend
           run: docker compose -f docker-compose-build.yml down
 
