@@ -96,6 +96,11 @@ jobs:
             docker compose -f docker-compose-build.yml up -d
             docker ps -a
 
+        - name: Sleep for 30 seconds
+          uses: jakejarvis/wait-action@master
+          with:
+            time: '30s'
+            
         - name: Test Docker log
           run: |
             docker logs backend_build
