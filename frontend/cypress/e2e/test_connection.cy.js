@@ -14,8 +14,8 @@ describe("TEST LOGIN FORM", () => {
 
         cy.get('[data-cy="admin-header"]').should('be.visible')
 
-        cy.get('[data-cy=admin-logout]').click()
-        cy.get('[data-cy=home-page]').should('be.visible')
+        cy.get('[data-cy="admin-logout"]').click()
+        cy.get('[data-cy="home-page"]').should('be.visible')
 
     })
 

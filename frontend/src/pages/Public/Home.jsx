@@ -14,6 +14,7 @@ const Home = () => {
 
     return (
         <div className='home' data-cy="home-page">
+            <p>Liste des Cocktails</p>
             {
                 cocktails.map((ckt, id) => (
                     <Card key={id} marcel={ckt} image='https://picsum.photos/1200/800?random=' />
