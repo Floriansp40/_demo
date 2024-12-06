@@ -96,21 +96,14 @@ jobs:
             docker compose -f docker-compose-build.yml up -d
             docker ps -a
 
-        - name: Sleep for 30 seconds
+        - name: Sleep for 10 seconds
           uses: jakejarvis/wait-action@master
           with:
             time: '10s'
-            
-        - name: Test Docker log
-          run: |
-            docker logs backend_build
 
-        - name: Test container
+        - name: Test Backend Container
           if: success()
           run: curl http://127.0.0.1:23000
-
-        - name: Autre test
-          run: curl http://localhost:23000
 
         - name: Setup node
           uses: actions/setup-node@v3
@@ -133,7 +126,7 @@ jobs:
             working-directory: frontend
             start: npm run dev
           
-        # Upload Cypress Test Résult
+        # Upload Cypress Test Result
         - uses: actions/upload-artifact@v4
           if: failure()
           with:
