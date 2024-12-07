@@ -1,0 +1,65 @@
+name: Intregation
+
+on:
+    push:
+        branches: 
+          - main
+    pull_request:
+      branches:
+        - main
+
+jobs:
+    QB:
+        # if: ${{ contains(github.event.head_commit.message, '#all') }}
+        if: ${{ github.event_name == 'push_request' && github.ref_name == 'main'}}
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: backend
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
+
+            - name: SonarQube Quality
+              uses: SonarSource/sonarcloud-github-action@v3.1.0
+              with:
+                projectBaseDir: ./backend
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+
+    QF:
+      if: ${{ github.event_name == 'push_request' && github.ref_name == 'main'}}
+      needs: ["QB"]
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: frontend
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: SonarQube Quality
+          uses: SonarSource/sonarcloud-github-action@v3.1.0
+          with:
+            projectBaseDir: ./frontend
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
+
+    canary:
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && contains(github.event.head_commit.message, '#canary')}}
+      needs: [QB,QF]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Just to see
+          run: echo CANARY
+
+    production:
+      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && contains(github.event.head_commit.message, '#production')}}
+      needs: [QB,QF]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Just to see
+          run: echo PRODUCTION
+

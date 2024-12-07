@@ -3,12 +3,11 @@ name: Intregation
 on:
     push:
         branches: 
-          - main
           - develop
 
 jobs:
-    backend:
-        if: ${{ contains(github.event.head_commit.message, '#all') }}
+    BackEnd:
+        # if: ${{ contains(github.event.head_commit.message, '#all') }}
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -74,15 +73,8 @@ jobs:
             - name: JUST TO SEE
               run: pwd
 
-            - name: SonarQube Quality
-              uses: SonarSource/sonarcloud-github-action@v3.1.0
-              with:
-                projectBaseDir: ./backend
-              env:
-                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
-
-    Integration:
-      needs: ["backend"]
+    FrontEnd:
+      needs: ["BackEnd"]
       runs-on: ubuntu-latest
       defaults:
         run:
@@ -146,11 +138,4 @@ jobs:
         - name: Clean Builded Backend Docker
           working-directory: backend
           run: docker compose -f docker-compose-build.yml down
-
-        - name: SonarQube Quality
-          uses: SonarSource/sonarcloud-github-action@v3.1.0
-          with:
-            projectBaseDir: ./frontend
-          env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
