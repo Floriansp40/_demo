@@ -4,9 +4,6 @@ on:
     push:
         branches: 
           - main
-    pull_request:
-      branches:
-        - main
 
 jobs:
     tosee:
@@ -17,8 +14,6 @@ jobs:
             echo ${{github.event_name}}
             echo ${{github.ref_name}}
     QB:
-        # if: ${{ contains(github.event.head_commit.message, '#all') }}
-        if: ${{ github.event_name == 'pull_request'}}
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -55,7 +50,7 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
     canary:
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && contains(github.event.head_commit.message, '#canary')}}
+      if: ${{ contains(github.event.head_commit.message, '#canary')}}
       needs: [QB,QF]
       runs-on: ubuntu-latest
       steps:
@@ -63,7 +58,7 @@ jobs:
           run: echo CANARY
 
     production:
-      if: ${{ github.event_name == 'push' && github.ref_name == 'main' && contains(github.event.head_commit.message, '#production')}}
+      if: ${{ contains(github.event.head_commit.message, '#production')}}
       needs: [QB,QF]
       runs-on: ubuntu-latest
       steps:
