@@ -18,7 +18,7 @@ jobs:
             echo ${{github.ref_name}}
     QB:
         # if: ${{ contains(github.event.head_commit.message, '#all') }}
-        if: ${{ github.event_name == 'push_request' && github.ref_name == 'main'}}
+        if: ${{ github.event_name == 'pull_request'}}
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -36,7 +36,7 @@ jobs:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
 
     QF:
-      if: ${{ github.event_name == 'push_request' && github.ref_name == 'main'}}
+      if: ${{ github.event_name == 'pull_request'}}
       needs: ["QB"]
       runs-on: ubuntu-latest
       defaults:
