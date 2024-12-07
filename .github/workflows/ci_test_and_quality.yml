@@ -3,11 +3,14 @@ name: Intregation
 on:
     push:
         branches: 
-          - develop
+          - main
+    pull_request:
+      branches:
+        - main
 
 jobs:
     BackEnd:
-        # if: ${{ contains(github.event.head_commit.message, '#all') }}
+        if: ${{ github.event_name == 'pull_request'}}
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -138,4 +141,56 @@ jobs:
         - name: Clean Builded Backend Docker
           working-directory: backend
           run: docker compose -f docker-compose-build.yml down
+
+    QualityBack: 
+      needs: ["BackEnd"] 
+      runs-on: ubuntu-latest
+      defaults:
+          run:
+              working-directory: backend
+
+      steps:
+          - name: Checkout Code
+            uses: actions/checkout@v3
+
+          - name: SonarQube Quality
+            uses: SonarSource/sonarcloud-github-action@v3.1.0
+            with:
+              projectBaseDir: ./backend
+            env:
+              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+    
+    QualityFront:
+      needs: ["FrontEnd"]
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: frontend
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: SonarQube Quality
+          uses: SonarSource/sonarcloud-github-action@v3.1.0
+          with:
+            projectBaseDir: ./frontend
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
+
+    canary:
+      if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#canary')}}
+      needs: [QualityFront, QualityBack]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Just to see
+          run: echo CANARY
+
+    production:
+      if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#production')}}
+      needs: [QualityFront, QualityBack]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Just to see
+          run: echo PRODUCTION
 

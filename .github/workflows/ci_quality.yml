@@ -1,9 +1,10 @@
 name: Intregation
 
 on:
-    push:
-        branches: 
-          - main
+    # push:
+    #     branches: 
+    #       - main
+    workflow_dispatch
 
 jobs:
     tosee:
@@ -14,6 +15,7 @@ jobs:
             echo ${{github.event_name}}
             echo ${{github.ref_name}}
     QB:
+        if: ${{ github.event_name == 'pull_request'}}
         runs-on: ubuntu-latest
         defaults:
             run:
