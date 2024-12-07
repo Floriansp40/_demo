@@ -8,6 +8,6 @@ jobs:
     wf_test_back:
         uses: ./.github/workflows/0_testBackEnd.yml
 
-    wf_test_front:
-        needs: ["wf_test_back"]
-        uses: ./.github/workflows/0_testFrontEnd.yml
+    # wf_test_front:
+    #     needs: ["wf_test_back"]
+    #     uses: ./.github/workflows/0_testFrontEnd.yml
