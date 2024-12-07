@@ -4,10 +4,11 @@ on:
     push:
         branches: 
           - main
+          - develop
 
 jobs:
     backend:
-        if: ${{ contains(github.event.head_commit.message, '#all') }}
+        # if: ${{ contains(github.event.head_commit.message, '#all') }}
         runs-on: ubuntu-latest
         defaults:
             run:
