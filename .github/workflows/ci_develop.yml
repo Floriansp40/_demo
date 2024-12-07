@@ -1,15 +1,13 @@
-name: Integration on Develop Branch
-run-name: ${{ github.actor }} is testing the front and back
+name: Test for back and front
 
 on:
-  push:
-    branches:
-      - develop
+    push:
+        branches: [develop]
 
 jobs:
-  test_back_workflow:
-    uses: ./.github/workflows/tests/testBackEnd.yml
+    wf_test_back:
+        uses: ./.github/workflows/tests/testBackEnd.yml
 
-  test_front_workflow:
-    needs: test_back_workflow
-    uses: ./.github/workflows/tests/testFrontEnd.yml
+    wf_test_front:
+        needs: [wf_test_back]
+        uses: ./.github/workflows/tests/testFrontEnd.yml
