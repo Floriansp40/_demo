@@ -9,6 +9,13 @@ on:
         - main
 
 jobs:
+    tosee:
+      runs-on: ubuntu-latest
+      steps:
+        - name: To see data
+          run: |
+            echo ${{github.event_name}}
+            echo ${{github.ref_name}}
     QB:
         # if: ${{ contains(github.event.head_commit.message, '#all') }}
         if: ${{ github.event_name == 'push_request' && github.ref_name == 'main'}}
