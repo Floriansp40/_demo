@@ -178,15 +178,24 @@ jobs:
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
-    canary:
+    DockerBuild:
+      if: ${{ github.event_name == 'push' }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Docker build
+          run: echo docker github ghrc
+
+    Canary:
       if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#canary')}}
+      needs: ["DockerBuild"]
       runs-on: ubuntu-latest
       steps:
         - name: Just to see
           run: echo CANARY
 
-    production:
+    Production:
       if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#production')}}
+      needs: ["DockerBuild"]
       runs-on: ubuntu-latest
       steps:
         - name: Just to see
