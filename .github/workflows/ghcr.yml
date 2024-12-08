@@ -9,7 +9,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubunt-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
