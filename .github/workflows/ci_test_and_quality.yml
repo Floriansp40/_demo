@@ -10,7 +10,7 @@ on:
 
 jobs:
     BackEnd:
-        if: ${{ github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '#test')}}
+        if: ${{ github.event_name == 'pull_request' && !contains(github.event.pull_request.head.ref, '#test')}}
         runs-on: ubuntu-latest
         defaults:
             run:
