@@ -48,4 +48,11 @@ jobs:
           echo ${{ steps.meta.outputs.tags }}
           echo ${{ steps.meta.outputs.labels }}
           echo ${{ steps.meta.outputs.flavor }}
+
+      - name: Push to gihub package
+        uses: docker/build-push-action@v4
+        with:
+          context: backend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
         
