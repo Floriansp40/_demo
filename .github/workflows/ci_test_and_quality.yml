@@ -9,6 +9,14 @@ on:
         - main
 
 jobs:
+    First:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Just to see metadata
+          run: |
+            echo ${{ github.event_name }}
+            echo ${{ github.event.head_commit}}
+            
     BackEnd:
         if: ${{ github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '#test')}}
         runs-on: ubuntu-latest

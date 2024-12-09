@@ -46,8 +46,7 @@ jobs:
           echo ${{ env.IMAGE_NAME }}
           echo ${{ github.actor }}
           echo ${{ steps.meta.outputs.tags }}
-          echo ${{ steps.meta.outputs.labels }}
-          echo ${{ steps.meta.outputs.flavor }}
+          echo ${{ steps.meta.outputs.labels }}        
 
       - name: Push to gihub package
         uses: docker/build-push-action@v4
