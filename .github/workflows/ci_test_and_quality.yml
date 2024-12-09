@@ -15,7 +15,7 @@ jobs:
         - name: Just to see metadata
           run: |
             echo ${{ github.event_name }}
-            echo ${{ github.event.head_commit.message}}
+            echo ${{ github.event.pull_request.head.ref}}
 
     BackEnd:
         if: ${{ github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '#test')}}
