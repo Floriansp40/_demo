@@ -9,16 +9,8 @@ on:
         - main
 
 jobs:
-    First:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Just to see metadata
-          run: |
-            echo ${{ github.event_name }}
-            echo ${{ github.event.pull_request.head.ref}}
-
     BackEnd:
-        if: ${{ github.event_name == 'pull_request' && !contains(github.event.head_commit.message, '#test')}}
+        if: ${{ github.event_name == 'pull_request' && !contains(github.event.pull_request.head.ref, '#test')}}
         runs-on: ubuntu-latest
         defaults:
             run:
